@@ -7,7 +7,7 @@ export default DS.RESTAdapter.extend({
     wskey: config.APP.API_KEY,
 
     ajax(url, type, hash) {
-        console.log(type+' '+url+' '+JSON.stringify(hash));
+        console.log('ajax(' + url + ',' + type + ',' + JSON.stringify(hash) + ')');
         if (url.match(/searches$/)) {
             url = url.replace(/searches$/, 'search');
             url = url + '.json?wskey=' + this.get('wskey') + '&query=amsterdam';
