@@ -29,11 +29,11 @@
         <div class="row">
             <table class="table">
                 <thead>
-                <tr><th>Index</th><th>Title</th><th>Country</th><th>Language</th><th>Type</th></tr>
+                <tr><th>#</th><th>Title</th><th>Country</th><th>Language</th><th>Type</th></tr>
                 </thead>
                 <tbody>
                 {{#each items as |item index| }}
-                    <tr><td>{{index}}</td><td>{{item.title}}</td><td>{{item.country}}</td><td>{{item.language}}</td><td>{{item.type}}</td></tr>
+                    <tr><td>{{index}}</td><td><a href="{{item.guid}}" target="_blank">{{item.title}}</a></td><td>{{item.country}}</td><td>{{item.language}}</td><td>{{item.type}}</td></tr>
                 {{/each}}
                 </tbody>
             </table>
