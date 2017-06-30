@@ -7,7 +7,12 @@
     <div class="collapse navbar-collapse" id="navbarsHeader">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                {{#link-to 'index' class='nav-link'}}Home{{/link-to}}
+                {{#active-link}}{{#link-to 'index' class='nav-link'}}Home{{/link-to}}{{/active-link}}
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-right">
+            <li class="nav-item">
+                {{#active-link}}{{#link-to 'about' class='nav-link'}}About{{/link-to}}{{/active-link}}
             </li>
         </ul>
     </div>

@@ -1,9 +1,42 @@
 <h2>Search</h2>
-<p class="lead">
-    Just fill in any text that you want to search for and hit submit button.
-</p>
+<p class="lead">Just fill in any text that you want to search and hit submit button</p>
 
-<form class="form-inline" style="text-align:center">
-    <input class="form-control col-md-6 offset-md-3" type="text" placeholder="Text goes here...">
-    <button class="btn btn-success" type="submit">Submit</button>
-</form>
+<hr/>
+
+<div class="inner-content">
+    <form class="form-inline">
+        {{input class="form-control col-md-9 offset-md-1" type="text" value=searchText placeholder="Text goes here..."}}
+        <button class="btn btn-success {{if enableSubmit '' 'disabled'}}" type="submit" {{action 'submit'}}>
+            {{#if loadingResults}}
+                {{fa-icon 'spinner' spin=true}}
+            {{/if}}
+            Submit</button>
+    </form>
+
+    {{#if loadedResults}}
+        <div class="row">
+            <div class="col-md-5 offset-md-1">
+                <table class="table">
+                    <tbody>
+                        <tr><td>Items Count: </td><td>{{itemsCount}}</td></tr>
+                        <tr><td>Request Number: </td><td>{{requestNumber}}</td></tr>
+                        <tr><td>Success: </td><td>{{success}}</td></tr>
+                        <tr><td>Total Results: </td><td>{{totalResults}}</td></tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                        <tr><th>Index</th><th>Id</th></tr>
+                    </thead>
+                    <tbody>
+                        {{#each items as |item index| }}
+                            <tr><td>{{index}}</td><td>{{item.id}}</td></tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {{/if}}
+</div>
+
+

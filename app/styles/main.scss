@@ -16,6 +16,10 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.35)
 }
 
-form .btn {
+button[type=submit] {
   margin-left: 10px;
+}
+
+.inner-content {
+  text-align: left;
 }
