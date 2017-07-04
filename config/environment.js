@@ -21,8 +21,10 @@ module.exports = function(environment) {
             // Here you can pass flags/options to your application instance
             // when it is created
             API_KEY: 'V2ENkYBGV',
+            API_KEY_ENTITIES: 'apidemo',
             PRIVATE_KEY: 'NhVq4SX2g',
             API_HOST: 'https://www.europeana.eu',
+            API_HOST_TEST: 'http://test-entity.europeana.eu',
             API_NAMESPACE: 'api/v2'
         },
 
