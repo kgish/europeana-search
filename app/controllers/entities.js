@@ -34,6 +34,7 @@ export default Ember.Controller.extend({
         },
         selectType(type) {
             this.set('type', type);
+            this._selectChar(this.get('char'));
         }
     },
 
