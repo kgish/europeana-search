@@ -30,13 +30,13 @@
                     <img class="card-img-top" src={{entity.depiction}} style="width:100%" alt="Card image cap">
                     <div class="card" style="width: 20rem;">
                         <div class="card-block">
-                            <h4 class="card-title">Card title</h4>
+                            <h4 class="card-title">{{entity.prefLabel}}</h4>
                             <p class="card-text">
                                 Some quick example text to build on the card title and make up the bulk of the card's content.
                             </p>
                         </div>
                         <div class="card-block">
-                            <a href="#" class="card-link">Card link</a>
+                            <a href="{{entity.id}}" class="card-link">{{fa-icon 'link'}} Link</a>
                         </div>
                     </div>
                 </div>
