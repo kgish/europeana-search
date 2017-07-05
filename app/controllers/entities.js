@@ -1,3 +1,4 @@
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
 import Ember from 'ember';
 import config from 'europeana-search/config/environment';
 
@@ -18,6 +19,22 @@ export default Ember.Controller.extend({
 
     entities: [],
 
+    menus: [{
+            type: 'All',
+            items: ['Link #1', 'Link #2', 'More Links']
+        },{
+            type: 'Agent',
+            items: ['Agent #1', 'Agent #2', 'More Agents']
+        },{
+            type: 'Concept',
+            items: ['Concept #1', 'Concept #2', 'More Concepts']
+        },{
+            type: 'Place',
+            items: ['Place #1', 'Place link #2', 'More Places']
+    }],
+
+    menu: [],
+
 // type = agent | concept | place
 // namespace = base
 
@@ -35,6 +52,7 @@ export default Ember.Controller.extend({
         selectType(type) {
             this.set('type', type);
             this._selectChar(this.get('char'));
+            this._selectMenu(type);
         }
     },
 
@@ -46,15 +64,48 @@ export default Ember.Controller.extend({
         this.set('loadingResults', true);
         Ember.$.get(url).then(
             data => {
-                console.log(data);
+                let entities = data.contains,
+                    promises = [];
                 this.set('loadingResults', false);
+                console.log(entities);
+                entities.forEach(entity =>{
+                    promises.push(Ember.$.get(entity.id));
+                });
+                Ember.RSVP.all(promises).then(
+                    data => {
+                        data.forEach(data => {
+                            console.log(data);
+                            let bio = data.biographicalInformation.findBy('@language', 'en'),
+                                entity = entities.findBy('id', data.id);
 
-                this.set('entities', data.contains);
+                            //console.log(bio['@value'], entity);
+                            if (entity) {
+                                entity.bio = bio['@value'];
+                            } else {
+                                console.error('Cannot find entity id='+entity.id);
+                            }
+                            });
+                        //console.log(entities);
+                        this.set('entities', entities);
+                    },
+                    error => {
+                        console.error(error);
+                    }
+                );
             },
             error => {
                 console.error(error);
                 this.set('loadingResults', false);
             }
         );
+    },
+
+    _selectMenu(type) {
+        let menus = this.get('menus'),
+            menu = menus.findBy('type', type);
+
+        console.log('menu='+JSON.stringify(menu));
+
+        this.set('menu', menus.findBy('type', type));
     }
 });

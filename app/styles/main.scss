@@ -36,4 +36,9 @@ select {
 
 .card {
   margin-bottom: 20px;
+
+  .card-block:last-child {
+    border-top: 1px solid gainsboro;
+  }
 }
+

@@ -1,3 +1,4 @@
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
 import Ember from 'ember';
 import config from 'europeana-search/config/environment';
 
@@ -22,11 +23,10 @@ export default Ember.Controller.extend({
         submit() {
             let searchText = this.get('searchText'),
                 url = `${config.APP.API_HOST}/${config.APP.API_NAMESPACE}/search.json?wskey=${config.APP.API_KEY}&query=${searchText}`;
-            //https://www.europeana.eu/api/v2/search.json?wskey=V2ENkYBGV&query=%22Mona+Lisa%22
             this.set('loadingResults', true);
             Ember.$.get(url).then(
                 data => {
-                    console.log(data);
+                    //console.log(data);
                     this.set('itemsCount', data.itemsCount);
                     this.set('requestNumber', data.requestNumber);
                     this.set('success', data.success);
